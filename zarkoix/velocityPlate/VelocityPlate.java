@@ -31,7 +31,7 @@ import java.util.Set;
 @Mod(modid="VelocityPlateID", name="Velocity Plate", version="0.0.1")
 @NetworkMod(clientSideRequired=true)
 public class VelocityPlate {
-	public static List<String> modules = null;
+	public static List<PlateAbility> modules = null;
 	
         // The instance of your mod that Forge uses.
         @Instance(value = "VelocityPlateID")

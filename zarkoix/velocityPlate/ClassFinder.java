@@ -9,11 +9,11 @@ import java.util.List;
 
 
 public class ClassFinder{
-	public static <T, R extends T> List<String> search(String packageName,  Class<T> type) throws InstantiationException, IllegalAccessException{
+	public static <T, R extends T> List<T> search(String packageName,  Class<T> type) throws InstantiationException, IllegalAccessException{
 		
 	//Preparation
 	URL root = Thread.currentThread().getContextClassLoader().getResource(packageName.replace(".", "/"));
-	List<String> list = new ArrayList<String>();
+	List<T> list = new ArrayList<T>();
 
 	// Filter .class files.
 	File[] files = new File(root.getFile()).listFiles(new FilenameFilter() {
@@ -40,7 +40,7 @@ public class ClassFinder{
 			System.out.println("AddING class: " + cls.getSimpleName());
 			T elem = cls.newInstance();
 			if(elem != null){
-				list.add(elem.getClass().getName());
+				list.add(elem);
 				System.out.println("Added class: " + cls.getSimpleName());}
 			else{
 				if(cls == null){

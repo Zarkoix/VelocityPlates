@@ -17,42 +17,29 @@ public class Plate extends BlockPressurePlate{
 		super(par1, null, par2Material, EnumMobType.everything);
 	}
 
-	public String plateType;
+	public PlateAbility plateType;
 	public String standard;
 	
 	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
     {
 		PlateTileEntity tile = (PlateTileEntity) par1World.getBlockTileEntity(par2, par3, par4);
-		if (tile != null)
+		if (tile != null && tile.ability != null)
 		{
 		   plateType = tile.ability;
+		   plateType.active(par1World, par2, par3, par4, par5Entity);
+		}else{
+			System.out.println("strange");
 		}
 		
-			if (plateType != null){
-				try {
-					Class a = Class.forName(plateType);
-					if(a.getSuperclass() == PlateAbility.class){
-						
-						Class<PlateAbility> b = (Class<PlateAbility>) a;
-						PlateAbility c = b.newInstance();
-						c.active(par1World, par2, par3, par4, par5Entity);
-						
-						}else{System.out.println("superClass of plateType is not PlateAbility very strange");}
-					
-						}catch (ClassNotFoundException e) {}
-						 catch (InstantiationException e) {}
-						 catch (IllegalAccessException e) {}
-
-				}
-			}	
+    }				
    
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
     {
 		System.out.println("block activated");
         	//open GUI
         	par5EntityPlayer.openGui(VelocityPlate.instance, 90, par1World, par2, par3, par4);
-        	return true;
-        
+ 
+        	return true;       
     }
 @Override
 	public TileEntity createTileEntity(World world, int metadata)
