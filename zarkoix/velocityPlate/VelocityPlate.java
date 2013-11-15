@@ -64,11 +64,9 @@ public class VelocityPlate {
 					System.out.println("Beginning search for modules");
 					modules = ClassFinder.search("assets.zarkoix.velocityPlate.plateAbility", PlateAbility.class);
 					System.out.println("Finished search for modules");
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
+				} catch (InstantiationException e) { 
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			
@@ -80,11 +78,11 @@ public class VelocityPlate {
                 Plate plate = new Plate(450, Material.iron);
                 
                 NetworkRegistry.instance().registerGuiHandler(this, this.proxy);
-                GameRegistry.registerTileEntity(zarkoix.velocityPlate.PlateTileEntity.class, "VelocityPlate");
+                GameRegistry.registerTileEntity(zarkoix.velocityPlate.PlateTileEntity.class, "velocityPlate");
                 GameRegistry.registerBlock(plate);
                 LanguageRegistry.addName(plate, "Plate");
-                MinecraftForge.EVENT_BUS.register(new Listeners());
-                NetworkRegistry.instance().registerConnectionHandler(new ConnectionHandling());
+               // MinecraftForge.EVENT_BUS.register(new Listeners());
+               //NetworkRegistry.instance().registerConnectionHandler(new ConnectionHandling());
                
                 
 					        

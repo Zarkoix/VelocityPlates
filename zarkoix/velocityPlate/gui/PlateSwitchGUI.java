@@ -29,6 +29,7 @@ public class PlateSwitchGUI extends BasicScreen implements ButtonHandler
 	{
 		super(null);
 		System.out.println("plateswitch gui called");
+		tile = (PlateTileEntity) par1World.getBlockTileEntity(x, y, z);
 		tileX = x;
 		tileY = y;
 		tileZ = z;
@@ -46,8 +47,7 @@ public class PlateSwitchGUI extends BasicScreen implements ButtonHandler
 	private Label selectedLabel;
 
 	private Container container;
-
-	private String plate;
+;
 	private int selectedAbility = 0;
 	private PlateTileEntity tile;
 
@@ -57,20 +57,23 @@ public class PlateSwitchGUI extends BasicScreen implements ButtonHandler
 		if(button == leftButton){
 			System.out.println("decrementing");
 			this.decrement();}
-		
+
 		if(button == rightButton){
 			System.out.println("incrementing");
 			this.increment();}
-		
+
 		if(button == selectButton){
 			System.out.println("You clicked on the selection button");
-			if(tile != null){
+			if(tile != null && VelocityPlate.modules.get(selectedAbility) != null){
+				System.out.println("	gui select pressed and conditions met: " + tile.getAbility().name());
 				tile.setAbility(VelocityPlate.modules.get(selectedAbility));
-				System.out.println("label update");
-				selectedLabel.setText(tile.ability.name() + " is selected");
-			}else{System.out.println("tile is null");}}
+				selectedLabel.setText(tile.getAbility().name() + " is selected");
+			}else{
+				System.out.println("tile is null");
+			}
 		}
-	
+	}
+
 
 
 	@Override
@@ -87,22 +90,21 @@ public class PlateSwitchGUI extends BasicScreen implements ButtonHandler
 	@Override
 	protected void createGui() {
 		System.out.println("createGUI");
-		
-		tile = (PlateTileEntity) world.getBlockTileEntity(tileX, tileY, tileZ);
+
 		if(tile == null){System.out.println("Very Strange");}
-		
+
 		container = new Container();
-		
+
 		selectedLabel = new Label("No Ability Selected");
-		
-		if(tile.ability != null){
-			selectedLabel.setText(tile.ability.name() + " is selected");
+
+		if(tile.getAbility() != null){
+			selectedLabel.setText(tile.getAbility().name() + " is selected");
 		}
-		
+
 		selectButton = new ButtonVanilla(this.width/3, 20, VelocityPlate.modules.get(selectedAbility).name(), this);
 		leftButton = new ButtonVanilla(10, 20, "<", this);
 		rightButton = new ButtonVanilla(10, 20, ">", this);
-		
+
 		container.addWidgets(selectButton, leftButton, rightButton, selectedLabel);
 		containers.add(container);
 	}
@@ -111,15 +113,11 @@ public class PlateSwitchGUI extends BasicScreen implements ButtonHandler
 	@Override
 	protected void reopenedGui() {
 	}
-	
 	public void updateScreen(){
 		super.updateScreen();
-		
-		selectButton.setText(VelocityPlate.modules.get(selectedAbility).name());
-		
 		if (mc.thePlayer == null || !mc.thePlayer.isEntityAlive())
 			close();
-			
+
 	}
 	@Override
 	protected void unhandledKeyTyped(char c, int code) {
@@ -136,6 +134,7 @@ public class PlateSwitchGUI extends BasicScreen implements ButtonHandler
 		}else{
 			selectedAbility++;
 		}
+		selectButton.setText(VelocityPlate.modules.get(selectedAbility).name());
 	}
 	public void decrement(){
 		if(selectedAbility == 0){
@@ -143,5 +142,10 @@ public class PlateSwitchGUI extends BasicScreen implements ButtonHandler
 		}else{
 			selectedAbility--;
 		}
+		selectButton.setText(VelocityPlate.modules.get(selectedAbility).name());
+	}
+	@Override
+	public boolean doesGuiPauseGame(){
+		return false;
 	}
 }

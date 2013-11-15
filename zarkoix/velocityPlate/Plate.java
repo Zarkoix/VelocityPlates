@@ -16,19 +16,14 @@ public class Plate extends BlockPressurePlate{
 	public Plate(int par1, Material par2Material) {
 		super(par1, null, par2Material, EnumMobType.everything);
 	}
-
-	public PlateAbility plateType;
-	public String standard;
 	
 	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
     {
 		PlateTileEntity tile = (PlateTileEntity) par1World.getBlockTileEntity(par2, par3, par4);
-		if (tile != null && tile.ability != null)
+		if (tile != null && tile.getAbility() != null)
 		{
-		   plateType = tile.ability;
-		   plateType.active(par1World, par2, par3, par4, par5Entity);
+		   tile.getAbility().active(par1World, par2, par3, par4, par5Entity);
 		}else{
-			System.out.println("strange");
 		}
 		
     }				
@@ -45,7 +40,8 @@ public class Plate extends BlockPressurePlate{
 	public TileEntity createTileEntity(World world, int metadata)
 	{
 		System.out.println("createTileEntity called");
-	   return new PlateTileEntity();
+		PlateTileEntity tile = new PlateTileEntity();
+	   return tile;
 	}
 @Override
 	public boolean hasTileEntity(int meta) {
