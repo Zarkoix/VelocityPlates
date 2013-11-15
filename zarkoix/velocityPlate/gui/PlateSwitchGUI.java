@@ -1,8 +1,12 @@
 package zarkoix.velocityPlate.gui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -22,6 +26,7 @@ import com.mcf.davidee.guilib.core.Container;
 import com.mcf.davidee.guilib.vanilla.ButtonVanilla;
 
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class PlateSwitchGUI extends BasicScreen implements ButtonHandler
 {
@@ -40,6 +45,7 @@ public class PlateSwitchGUI extends BasicScreen implements ButtonHandler
 	private int tileX;
 	private int tileY;
 	private int tileZ;
+	private EntityPlayer player;
 
 	private Button selectButton;
 	private Button leftButton;
@@ -65,13 +71,35 @@ public class PlateSwitchGUI extends BasicScreen implements ButtonHandler
 		if(button == selectButton){
 			System.out.println("You clicked on the selection button");
 			if(tile != null && VelocityPlate.modules.get(selectedAbility) != null){
-				System.out.println("	gui select pressed and conditions met: " + tile.getAbility().name());
-				tile.setAbility(VelocityPlate.modules.get(selectedAbility));
-				selectedLabel.setText(tile.getAbility().name() + " is selected");
+				System.out.println("Sending Packet");
+				PacketDispatcher.sendPacketToServer(this.createPacket(tileX, tileY, tileZ, selectedAbility));
+				selectedLabel.setText(VelocityPlate.modules.get(selectedAbility).name() + " is selected");
 			}else{
 				System.out.println("tile is null");
 			}
 		}
+	}
+
+
+
+	private Packet250CustomPayload createPacket(int x, int y, int z, int s) {
+		ByteArrayOutputStream bos = new ByteArrayOutputStream(16);
+		DataOutputStream outputStream = new DataOutputStream(bos);
+		try {
+		        outputStream.writeInt(x);
+		        outputStream.writeInt(y);
+		        outputStream.writeInt(z);
+		        outputStream.writeInt(s);
+		} catch (Exception ex) {
+		        ex.printStackTrace();
+		}
+
+		Packet250CustomPayload packet = new Packet250CustomPayload();
+		packet.channel = "VP:setPAServer";
+		packet.data = bos.toByteArray();
+		packet.length = bos.size();
+		
+		return packet;
 	}
 
 
