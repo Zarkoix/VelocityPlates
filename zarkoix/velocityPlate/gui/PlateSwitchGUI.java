@@ -86,7 +86,7 @@ public class PlateSwitchGUI extends BasicScreen implements ButtonHandler
 		}
 
 		Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = "VP:setPAServer";
+		packet.channel = "VP:sync";
 		packet.data = bos.toByteArray();
 		packet.length = bos.size();
 		

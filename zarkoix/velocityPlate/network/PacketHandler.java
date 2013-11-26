@@ -12,6 +12,8 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class PacketHandler implements IPacketHandler {
 
@@ -20,17 +22,17 @@ public class PacketHandler implements IPacketHandler {
                         Packet250CustomPayload packet, Player playerEntity) {
         	System.out.println("Packet recieved at handler " + packet.channel);
         	net.minecraft.entity.player.EntityPlayer player = (net.minecraft.entity.player.EntityPlayer) playerEntity;
-        	
-               if(packet.channel.equals("VP:setPAServer")){
+        	Side side = FMLCommonHandler.instance().getEffectiveSide();
+               if(side == Side.SERVER){
             	   handleSetPlateServer(packet, player);
                }
-               if(packet.channel.equals("VP:setPAClient")){
+               if(side == Side.CLIENT){
             	   handleSetPlateClient(packet, player);
                }
         }
 
 		private void handleSetPlateServer(Packet250CustomPayload packet, net.minecraft.entity.player.EntityPlayer player) {
-			System.out.println("Packet Recieved @ server, channel: VP:setPAServer");
+			System.out.println("Packet Recieved @ server");
 			
 			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
             
@@ -54,12 +56,14 @@ public class PacketHandler implements IPacketHandler {
             }
             
             System.out.println("Forwarding packet");
-            packet.channel = "VP:setPAClient";
-            PacketDispatcher.sendPacketToPlayer(packet, (Player) player); 
+            packet.channel = "VP:sync";
+            PacketDispatcher.sendPacketToAllPlayers(packet);
 			
 		}
 
 		private void handleSetPlateClient(Packet250CustomPayload packet, net.minecraft.entity.player.EntityPlayer player){
+			System.out.println("Packet Recieved @ client");
+			
 			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
             
             int xCoord;
