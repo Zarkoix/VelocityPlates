@@ -15,8 +15,8 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
 import zarkoix.velocityPlate.PlateAbility;
-import zarkoix.velocityPlate.PlateTileEntity;
 import zarkoix.velocityPlate.VelocityPlate;
+import zarkoix.velocityPlate.tileEntities.PlateTileEntity;
 
 import com.mcf.davidee.guilib.basic.BasicScreen;
 import com.mcf.davidee.guilib.basic.Label;

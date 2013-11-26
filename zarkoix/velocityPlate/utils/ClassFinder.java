@@ -1,4 +1,4 @@
-package zarkoix.velocityPlate;
+package zarkoix.velocityPlate.utils;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -29,7 +29,6 @@ public class ClassFinder{
 		try {
 			cls = (Class<R>) Class.forName(packageName + "." + className);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			cls = null;
 		}

@@ -1,9 +1,11 @@
-package zarkoix.velocityPlate;
+package zarkoix.velocityPlate.network;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import zarkoix.velocityPlate.VelocityPlate;
+import zarkoix.velocityPlate.tileEntities.PlateTileEntity;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;

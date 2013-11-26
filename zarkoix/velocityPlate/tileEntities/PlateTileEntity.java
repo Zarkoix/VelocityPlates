@@ -1,5 +1,6 @@
-package zarkoix.velocityPlate;
+package zarkoix.velocityPlate.tileEntities;
 
+import zarkoix.velocityPlate.PlateAbility;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 

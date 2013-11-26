@@ -1,4 +1,4 @@
-package zarkoix.velocityPlate;
+package zarkoix.velocityPlate.network;
 
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.NetLoginHandler;

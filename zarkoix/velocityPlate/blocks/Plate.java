@@ -1,6 +1,8 @@
-package zarkoix.velocityPlate;
+package zarkoix.velocityPlate.blocks;
 
 
+import zarkoix.velocityPlate.VelocityPlate;
+import zarkoix.velocityPlate.tileEntities.PlateTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.EnumMobType;

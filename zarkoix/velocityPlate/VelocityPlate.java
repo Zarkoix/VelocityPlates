@@ -28,6 +28,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import zarkoix.velocityPlate.blocks.Plate;
+import zarkoix.velocityPlate.network.PacketHandler;
+import zarkoix.velocityPlate.utils.ClassFinder;
+
 @Mod(modid="VelocityPlateID", name="Velocity Plate", version="0.0.1")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true, 
 channels={"VP:setPAServer", "VP:setPAClient"}, packetHandler = PacketHandler.class)
@@ -79,7 +83,7 @@ public class VelocityPlate {
                 Plate plate = new Plate(450, Material.iron);
                 
                 NetworkRegistry.instance().registerGuiHandler(this, this.proxy);
-                GameRegistry.registerTileEntity(zarkoix.velocityPlate.PlateTileEntity.class, "velocityPlate");
+                GameRegistry.registerTileEntity(zarkoix.velocityPlate.tileEntities.PlateTileEntity.class, "velocityPlate");
                 GameRegistry.registerBlock(plate);
                 LanguageRegistry.addName(plate, "Plate");
                // MinecraftForge.EVENT_BUS.register(new Listeners());
