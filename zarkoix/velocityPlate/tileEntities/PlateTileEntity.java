@@ -29,7 +29,7 @@ public class PlateTileEntity extends TileEntity{
 		System.out.println ("setAbility("+par0+"):");
 		try {
 			System.out.println("	trying to find Class with name : " + par0);
-			Class test = Class.forName(par0);
+			Class<?> test = Class.forName(par0);
 			System.out.println ("	found class with name : " + par0 + "/" + test.getName());
 			if(test.getSuperclass() == PlateAbility.class){
 				System.out.println("	class is of type PlateAbility : " + par0 + "/" + test.getName() + " extends " + PlateAbility.class.getName());

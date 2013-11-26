@@ -3,18 +3,11 @@ package zarkoix.velocityPlate.gui;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GL11;
-
-import zarkoix.velocityPlate.PlateAbility;
 import zarkoix.velocityPlate.VelocityPlate;
 import zarkoix.velocityPlate.tileEntities.PlateTileEntity;
 
@@ -25,7 +18,6 @@ import com.mcf.davidee.guilib.core.Button.ButtonHandler;
 import com.mcf.davidee.guilib.core.Container;
 import com.mcf.davidee.guilib.vanilla.ButtonVanilla;
 
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class PlateSwitchGUI extends BasicScreen implements ButtonHandler
@@ -38,14 +30,13 @@ public class PlateSwitchGUI extends BasicScreen implements ButtonHandler
 		tileX = x;
 		tileY = y;
 		tileZ = z;
-		world = par1World;
 	}
 
-	private World world;
+	
 	private int tileX;
 	private int tileY;
 	private int tileZ;
-	private EntityPlayer player;
+	
 
 	private Button selectButton;
 	private Button leftButton;

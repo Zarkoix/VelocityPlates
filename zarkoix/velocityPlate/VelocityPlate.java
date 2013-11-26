@@ -1,11 +1,6 @@
 package zarkoix.velocityPlate;
 
-import com.google.common.reflect.Reflection;
-
-import assets.zarkoix.velocityPlate.plateAbility.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.Mod.EventHandler; // used in 1.6.2
@@ -17,22 +12,17 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-
-import java.lang.reflect.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-
 import zarkoix.velocityPlate.blocks.Plate;
 import zarkoix.velocityPlate.network.PacketHandler;
 import zarkoix.velocityPlate.utils.ClassFinder;
 
-@Mod(modid="VelocityPlateID", name="Velocity Plate", version="0.0.1")
+@Mod(modid="VelocityPlateID", name="Velocity Plate", version="0.1.4")
 @NetworkMod(clientSideRequired=true, serverSideRequired=true, 
 channels={"VP:setPAServer", "VP:setPAClient"}, packetHandler = PacketHandler.class)
 public class VelocityPlate {
@@ -82,9 +72,8 @@ public class VelocityPlate {
 				
                 Plate plate = new Plate(450, Material.iron);
                 
-                NetworkRegistry.instance().registerGuiHandler(this, this.proxy);
+                NetworkRegistry.instance().registerGuiHandler(this, proxy);
                 GameRegistry.registerTileEntity(zarkoix.velocityPlate.tileEntities.PlateTileEntity.class, "velocityPlate");
-                GameRegistry.registerBlock(plate);
                 LanguageRegistry.addName(plate, "Plate");
                // MinecraftForge.EVENT_BUS.register(new Listeners());
                //NetworkRegistry.instance().registerConnectionHandler(new ConnectionHandling());

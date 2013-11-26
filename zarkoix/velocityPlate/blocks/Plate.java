@@ -3,14 +3,11 @@ package zarkoix.velocityPlate.blocks;
 
 import zarkoix.velocityPlate.VelocityPlate;
 import zarkoix.velocityPlate.tileEntities.PlateTileEntity;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.EnumMobType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
